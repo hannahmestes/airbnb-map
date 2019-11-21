@@ -8,7 +8,7 @@ const routes: Routes = [];
 @NgModule({
   imports: [RouterModule.forRoot(routes),
             AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyC0-e-LMelOmiIBz-PpBapJN6VYw501quE'
+            apiKey: ''
     })],
   exports: [RouterModule]
 })
