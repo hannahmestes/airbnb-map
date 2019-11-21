@@ -8,13 +8,19 @@
 </mat-toolbar>
 <agm-map [(latitude)]="lat" [(longitude)]="lng" [(zoom)]="zoom">
   <div *ngIf="showAirBnBs">
-    <agm-marker *ngFor="let marker of airBnBMarkers" [iconUrl]="airbnbIcon" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+    <agm-marker *ngFor="let marker of airBnBMarkers" [iconUrl]="airbnbIcon" [latitude]="marker.lat" [longitude]="marker.lng">
+      <agm-info-window>{{marker.label}}</agm-info-window>
+    </agm-marker>
   </div>
   <div *ngIf="showCrimes">
-      <agm-marker *ngFor="let marker of ratMarkers" [iconUrl]="crimeIcon" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+      <agm-marker *ngFor="let marker of ratMarkers" [iconUrl]="crimeIcon" [latitude]="marker.lat" [longitude]="marker.lng">
+        <agm-info-window>{{marker.label}}</agm-info-window>
+      </agm-marker>
   </div>
   <div *ngIf="showRats">
-    <agm-marker *ngFor="let marker of crimeMarkers" [iconUrl]="ratIcon" [latitude]="marker.lat" [longitude]="marker.lng"></agm-marker>
+    <agm-marker *ngFor="let marker of crimeMarkers" [iconUrl]="ratIcon" [latitude]="marker.lat" [longitude]="marker.lng">
+      <agm-info-window>{{marker.label}}</agm-info-window>
+    </agm-marker>
   </div>
 </agm-map>
 
