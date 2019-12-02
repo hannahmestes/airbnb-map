@@ -19,7 +19,6 @@
   </div>
   <div *ngIf="showRats">
     <agm-marker *ngFor="let marker of crimeMarkers" [iconUrl]="ratIcon" [latitude]="marker.lat" [longitude]="marker.lng">
-      <agm-info-window>{{marker.label}}</agm-info-window>
     </agm-marker>
   </div>
 </agm-map>
@@ -49,5 +48,3 @@
   </mat-grid-list>
 </mat-card>
 </form>
-
-<div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> and <a href="https://www.flaticon.com/authors/dinosoftlabs" title="DinosoftLabs">DinosoftLabs</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>

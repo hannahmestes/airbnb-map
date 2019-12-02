@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs/internal/Rx';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component } from '@angular/core';
 import { Marker } from './marker';
@@ -17,9 +18,13 @@ export class AppComponent {
   ratMarkers: Marker[];
   crimeMarkers: Marker[];
 
+  asubsc: Subscription;
+  rsubsc: Subscription;
+  csubsc: Subscription;
+
   showAirBnBs= true;
-  showCrimes= false;
-  showRats= false;
+  showCrimes= true;
+  showRats= true;
 
   airbnbIcon = {
     url: "assets/home.svg",
@@ -109,9 +114,28 @@ export class AppComponent {
   }
 
   getMarkers(borough){    
-    this.airBnBMarkers = this.database.getAirBnBs(borough);
-    this.ratMarkers = this.database.getRats(borough);
-    this.crimeMarkers = this.database.getCrimes(borough);
+    if(this.asubsc) this.asubsc.unsubscribe();
+    if(this.rsubsc) this.rsubsc.unsubscribe();
+    if(this.csubsc) this.csubsc.unsubscribe();
+    this.airBnBMarkers = [];
+    this.ratMarkers = [];
+    this.crimeMarkers = [];
+
+    this. asubsc = this.database.getAirBnBs(borough).subscribe( airbnbs=>{
+      airbnbs.forEach(element=> {
+        this.airBnBMarkers.push(new Marker(element.name, element.latitude, element.longitude))
+      });
+    });
+    this.database.getRats(borough).subscribe(rats=> {
+      rats.forEach(element => {
+        this.ratMarkers.push(new Marker("", element.Latitude, element.Longitude));
+      })
+    });
+    this.database.getCrimes(borough).subscribe(crimes => {
+      crimes.forEach(element => {
+        this.crimeMarkers.push(new Marker(element.Description, element.Latitude, element.Longitude));
+      })
+    });
   }
 
 
